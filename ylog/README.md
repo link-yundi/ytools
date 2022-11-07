@@ -1,11 +1,5 @@
 # ylog
 
-### 安装
-
-```sh
-go get -u github.com/link-yundi/ytools
-```
-
 ### 特性
 
 - 级别
