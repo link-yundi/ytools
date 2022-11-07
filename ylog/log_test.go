@@ -15,7 +15,7 @@ Created on 2022-11-07 12:26
 
 func TestDebug(t *testing.T) {
 	SetLogLevel(LevelDebug)
-	msg := "debug"
+	msg := "trace"
 	Trace(msg)                 // 不会输出
 	Debug(msg)                 // 可以输出
 	Info(msg)                  // 可以输出
@@ -26,4 +26,5 @@ func TestDebug(t *testing.T) {
 	Debug(err)
 	Info(err)
 	Error(err)
+	Print("ping")
 }

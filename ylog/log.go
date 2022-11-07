@@ -83,14 +83,15 @@ func Trace(v ...interface{}) {
 	if !canInfo(LevelTrace) {
 		return
 	}
-	l.Output(2, fmt.Sprintln("[TRACE]", v))
+	str := "[TRACE] " + fmt.Sprintln(v...)
+	l.Output(2, str)
 }
 
 func Tracef(format string, v ...interface{}) {
 	if !canInfo(LevelTrace) {
 		return
 	}
-	format = "[TRACE] [" + format + "]"
+	format = "[TRACE] " + format
 	l.Output(2, fmt.Sprintf(format, v...))
 }
 
@@ -98,14 +99,15 @@ func Debug(v ...interface{}) {
 	if !canInfo(LevelDebug) {
 		return
 	}
-	l.Output(2, fmt.Sprintln("[DEBUG]", v))
+	str := "[DEBUG] " + fmt.Sprintln(v...)
+	l.Output(2, str)
 }
 
 func Debugf(format string, v ...interface{}) {
 	if !canInfo(LevelDebug) {
 		return
 	}
-	format = "[DEBUG] [" + format + "]"
+	format = "[DEBUG] " + format
 	l.Output(2, fmt.Sprintf(format, v...))
 }
 
@@ -113,14 +115,15 @@ func Warn(v ...interface{}) {
 	if !canInfo(LevelWarn) {
 		return
 	}
-	l.Output(2, fmt.Sprintln("[WARN]", v))
+	str := "[WARN] " + fmt.Sprintln(v...)
+	l.Output(2, str)
 }
 
 func Warnf(format string, v ...interface{}) {
 	if !canInfo(LevelWarn) {
 		return
 	}
-	format = "[WARN] [" + format + "]"
+	format = "[WARN] " + format
 	l.Output(2, fmt.Sprintf(format, v...))
 }
 
@@ -137,24 +140,36 @@ func Info(v ...interface{}) {
 	if !canInfo(LevelInfo) {
 		return
 	}
-	l.Output(2, fmt.Sprintln("[INFO]", v))
+	str := "[INFO] " + fmt.Sprintln(v...)
+	l.Output(2, str)
 }
 
 func Infof(format string, v ...interface{}) {
 	if !canInfo(LevelInfo) {
 		return
 	}
-	format = "[INFO] [" + format + "]"
+	format = "[INFO] " + format
 	l.Output(2, fmt.Sprintf(format, v...))
 }
 
 func Fatal(v ...interface{}) {
-	l.Output(2, fmt.Sprintln("[FATAL]", v))
+	str := "[FATAL] " + fmt.Sprintln(v...)
+	l.Output(2, str)
 	os.Exit(1)
 }
 
 func Fatalf(format string, v ...interface{}) {
-	format = "[FATAL] [" + format + "]"
+	format = "[FATAL] " + format
 	l.Output(2, fmt.Sprintf(format, v...))
 	os.Exit(1)
+}
+
+func Print(v ...interface{}) {
+	str := "[PRINT] " + fmt.Sprintln(v...)
+	l.Output(2, str)
+}
+
+func Printf(format string, v ...interface{}) {
+	format = "[PRINT] " + format
+	l.Output(2, fmt.Sprintf(format, v...))
 }
