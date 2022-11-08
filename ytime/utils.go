@@ -13,6 +13,15 @@ Created on 2022-11-07 16:31
 ------------------------------------------------
 **/
 
+const (
+	DateLayout       string = "20060102"
+	DatetimeLayout   string = "2006-01-02 15:04:05"
+	DatetimeMsLayout string = "2006-01-02 15:04:05.000"
+	DateLayout_      string = "2006-01-02"
+	TimeLayout       string = "15:04:05"
+	TimeMsLayout     string = "15:04:05.000"
+)
+
 // yyyymmdd
 func Date(t time.Time) string {
 	return t.Format(DateLayout)

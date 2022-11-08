@@ -152,6 +152,16 @@ func Infof(format string, v ...interface{}) {
 	l.Output(2, fmt.Sprintf(format, v...))
 }
 
+func Panic(v ...interface{}) {
+	str := "[PANIC] " + fmt.Sprintln(v...)
+	l.Output(2, str)
+}
+
+func Panicf(format string, v ...interface{}) {
+	format = "[PANIC] " + format
+	l.Output(2, fmt.Sprintf(format, v...))
+}
+
 func Fatal(v ...interface{}) {
 	str := "[FATAL] " + fmt.Sprintln(v...)
 	l.Output(2, str)
