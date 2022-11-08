@@ -1,8 +1,8 @@
 package ywrap
 
 import (
-	"errors"
 	"fmt"
+	"github.com/link-yundi/ytools/ylog"
 	"testing"
 	"time"
 )
@@ -33,6 +33,13 @@ func TestNilRet(t *testing.T) {
 }
 
 func TestPanic(t *testing.T) {
-	err := errors.New("panic")
-	WithRecover(func() { panic(err) })
+	panicFunc := func() {
+		defer ylog.Panic()
+		a := make([]int, 0)
+		fmt.Println(a[0])
+
+	}
+	//WithRecover(panicFunc)
+	panicFunc()
+	fmt.Println("go on 恢复运行")
 }

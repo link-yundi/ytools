@@ -6,6 +6,7 @@ import (
 	"io"
 	log_ "log"
 	"os"
+	"runtime"
 	"strings"
 )
 
@@ -152,14 +153,13 @@ func Infof(format string, v ...interface{}) {
 	l.Output(2, fmt.Sprintf(format, v...))
 }
 
-func Panic(v ...interface{}) {
-	str := "[PANIC] " + fmt.Sprintln(v...)
-	l.Output(2, str)
-}
-
-func Panicf(format string, v ...interface{}) {
-	format = "[PANIC] " + format
-	l.Output(2, fmt.Sprintf(format, v...))
+func Panic() {
+	if err := recover(); err != nil {
+		var buf [4096]byte
+		n := runtime.Stack(buf[:], false)
+		l.Output(2, fmt.Sprintf("[PANIC] original err:%v", err))
+		l.Output(2, fmt.Sprintf("[PANIC] stack trace: \n %s", string(buf[:n])))
+	}
 }
 
 func Fatal(v ...interface{}) {

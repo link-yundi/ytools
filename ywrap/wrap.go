@@ -32,11 +32,7 @@ func WithTime(wrapper interface{}, args ...interface{}) (outs []interface{}) {
 }
 
 func WithRecover(wrapper interface{}, args ...interface{}) (outs []interface{}) {
-	defer func() {
-		if err := recover(); err != nil {
-			ylog.Printf("%v", wrapper)
-		}
-	}()
+	defer ylog.Panic()
 	var ins []reflect.Value
 	for _, arg := range args {
 		ins = append(ins, reflect.ValueOf(arg))

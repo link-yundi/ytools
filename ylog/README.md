@@ -22,3 +22,23 @@ logFilePath := "log/to/path"
 log.SetLogFile(logFilePath)
 ```
 
+#### panic
+
+```go
+func main() {
+    panicFunc := func() {
+        defer ylog.Panic() // 打印 panic ,不中断 运行
+        a := make([]int, 0)
+        fmt.Println(a[0])
+    
+    }
+    panicFunc()
+    fmt.Println("go on")
+}
+
+// Output:
+// [PANIC] original err:runtime error: index out of range [0] with length 0
+// [PANIC] stack trace: 
+// go on 恢复运行
+```
+
