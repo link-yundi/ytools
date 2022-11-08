@@ -27,7 +27,7 @@ func WithTime(wrapper interface{}, args ...interface{}) (outs []interface{}) {
 	}
 	endT := time.Now()
 	duration := endT.Sub(startT).Seconds()
-	ylog.Printf("耗时: %.3f s", duration)
+	ylog.Printf("运行时间: %.3f s", duration)
 	return outs
 }
 
