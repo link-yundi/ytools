@@ -43,3 +43,9 @@ func TestPanic(t *testing.T) {
 	panicFunc()
 	fmt.Println("go on 恢复运行")
 }
+
+func TestWithApply(t *testing.T) {
+	a := []int{1, 3}
+	WithApply(func(x int) int { return x + 1 }, a)
+	fmt.Println(a)
+}

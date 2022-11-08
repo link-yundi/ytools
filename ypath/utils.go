@@ -1,4 +1,4 @@
-package ydir
+package ypath
 
 import (
 	"os"
@@ -21,9 +21,9 @@ func MkDirs(dirPath string) error {
 	return nil
 }
 
-// Has 判断文件夹是否存在
-func Has(dirPath string) bool {
-	_, err := os.Stat(dirPath)
+// Has 判断文件夹/文件是否存在
+func Has(path string) bool {
+	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		return false
 	}

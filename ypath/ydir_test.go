@@ -1,4 +1,4 @@
-package ydir
+package ypath
 
 import (
 	"github.com/link-yundi/ytools/ylog"

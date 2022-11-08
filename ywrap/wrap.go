@@ -43,3 +43,16 @@ func WithRecover(wrapper interface{}, args ...interface{}) (outs []interface{}) 
 	}
 	return outs
 }
+
+func WithApply(wrapper interface{}, slice interface{}) {
+	if reflect.ValueOf(slice).Kind() != reflect.Slice {
+		return
+	}
+	value := reflect.ValueOf(slice)
+	length := value.Len()
+	for i := 0; i < length; i++ {
+		val := value.Index(i)
+		res := reflect.ValueOf(wrapper).Call([]reflect.Value{val})[0]
+		val.Set(res)
+	}
+}
