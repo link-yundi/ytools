@@ -47,7 +47,7 @@ func WriteCsvWithTag(data interface{}, filePath string) error {
 }
 
 // ReadCsv 读取csv
-func ReadCsv(filePath string, dest interface{}) error {
+func ReadCsv(dest interface{}, filePath string) error {
 	// dest: 接收的对象
 	byteData, err := os.ReadFile(filePath)
 	if err != nil {
