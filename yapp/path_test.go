@@ -18,5 +18,4 @@ func TestInitApp(t *testing.T) {
 	if err != nil {
 		ylog.Error(err)
 	}
-	Info()
 }

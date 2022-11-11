@@ -28,9 +28,9 @@ func InitApp(userHomePath, appname string) error {
 	var err error
 	AppName = appname
 	HomeDir = userHomePath
-	AppDir = path.Join(HomeDir, "applications", AppName)
-	LogDir = path.Join(HomeDir, "var", AppName, "log")
-	ConfDir = path.Join(HomeDir, "etc", AppName, "conf")
+	AppDir = path.Join(HomeDir, "application", AppName)
+	LogDir = path.Join(AppDir, "log")
+	ConfDir = path.Join(AppDir, "conf")
 	for _, dir := range []string{HomeDir, AppDir, LogDir, ConfDir} {
 		err = ypath.MkDirs(dir)
 		if err != nil {
