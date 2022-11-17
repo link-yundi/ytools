@@ -37,6 +37,11 @@ func NewFish(fn func(interface{})) *Fish {
 	}
 }
 
+// 设置最大协程数
+func MaxGo(num int) {
+	workingChan = make(chan struct{}, num)
+}
+
 // 提交协程
 func Submit(fns ...*Fish) {
 	for _, fn_ := range fns {
