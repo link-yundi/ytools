@@ -22,11 +22,11 @@ func WriteCsv(data interface{}, filePath string) error {
 	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.ModePerm)
 	defer file.Close()
 	if err != nil {
-		return yerr.New(err)
+		return yerr.New(err.Error())
 	}
 	err = df.WriteCSV(file)
 	if err != nil {
-		return yerr.New(err)
+		return yerr.New(err.Error())
 	}
 	return nil
 }
@@ -35,14 +35,14 @@ func WriteCsv(data interface{}, filePath string) error {
 func WriteCsvWithTag(data interface{}, filePath string) error {
 	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_RDWR|os.O_TRUNC, os.ModePerm)
 	if err != nil {
-		return yerr.New(err)
+		return yerr.New(err.Error())
 	}
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 	encoder := csvutil.NewEncoder(writer)
 	err = encoder.Encode(data)
 	if err != nil {
-		return yerr.New(err)
+		return yerr.New(err.Error())
 	}
 	return nil
 }
@@ -52,11 +52,11 @@ func ReadCsv(dest interface{}, filePath string) error {
 	// dest: 接收的对象
 	byteData, err := os.ReadFile(filePath)
 	if err != nil {
-		return yerr.New(err)
+		return yerr.New(err.Error())
 	}
 	err = csvutil.Unmarshal(byteData, dest)
 	if err != nil {
-		return yerr.New(err)
+		return yerr.New(err.Error())
 	}
 	return nil
 }

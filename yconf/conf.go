@@ -18,11 +18,11 @@ func LoadConf(conf interface{}, confPaths ...string) error {
 	for _, confPath := range confPaths {
 		cfgFile, err := os.ReadFile(confPath)
 		if err != nil {
-			return yerr.New(err)
+			return yerr.New(err.Error())
 		}
 		err = yaml.Unmarshal(cfgFile, conf)
 		if err != nil {
-			return yerr.New(err)
+			return yerr.New(err.Error())
 		}
 	}
 	return nil

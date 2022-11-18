@@ -2,6 +2,7 @@ package ylog
 
 import (
 	"fmt"
+	"github.com/pkg/errors"
 	"io"
 	log_ "log"
 	"os"
@@ -133,7 +134,7 @@ func Error(err error) {
 	}
 	//l.Output(2, fmt.Sprintf("[ERROR] original err:%T\n", errors.Cause(err)))
 	//l.Output(2, fmt.Sprintf("[ERROR] error msg: %v\n", errors.Cause(err)))
-	l.Output(2, fmt.Sprintf("[ERROR] \n %+v\n", err))
+	l.Output(2, fmt.Sprintf("[ERROR] %T\n %+v\n", errors.Cause(err), err))
 }
 
 func Info(v ...interface{}) {

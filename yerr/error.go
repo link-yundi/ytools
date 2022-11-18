@@ -19,8 +19,9 @@ var (
 	errList []error
 )
 
-func New(err error) error {
-	return errors.Wrap(err, ytools.ErrStackTraceSplit)
+func New(message string) error {
+	message = ytools.ErrStackTraceSplit + "\n" + message
+	return errors.New(message)
 }
 
 // 错误归集器

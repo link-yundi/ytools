@@ -99,7 +99,7 @@ func TimeList(startT, endT time.Time, step int, offsetFunc func(t time.Time, off
 func Parse(layout string, t string) (time.Time, error) {
 	res, err := time.Parse(layout, t)
 	if err != nil {
-		return time.Time{}, yerr.New(err)
+		return time.Time{}, yerr.New(err.Error())
 	}
 	return res, nil
 }
