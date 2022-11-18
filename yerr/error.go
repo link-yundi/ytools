@@ -1,4 +1,4 @@
-package yerror
+package yerr
 
 import "github.com/link-yundi/ytools/ylog"
 
