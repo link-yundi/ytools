@@ -3,7 +3,6 @@ package ytime
 import (
 	"github.com/link-yundi/ytools/ylog"
 	"testing"
-	"time"
 )
 
 /**
@@ -15,9 +14,13 @@ Created on 2022-11-07 18:59
 **/
 
 func TestTimeList(t *testing.T) {
-	startT := time.Now()
-	endT := SecsOffset(startT, 30)
-	tList := TimeList(startT, endT, 4, SecsOffset)
+	startDatetime := "2022-11-18 17:41:00.000"
+	startDt, err := Parse(DateLayout, startDatetime)
+	if err != nil {
+		ylog.Error(err)
+	}
+	endT := TimeOffsetSecs(startDt, 50)
+	tList := TimeList(startDt, endT, 4, TimeOffsetSecs)
 	for _, d := range tList {
 		ylog.Info(Datetime(d))
 	}

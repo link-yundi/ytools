@@ -2,6 +2,7 @@ package ytime
 
 import (
 	"fmt"
+	"github.com/link-yundi/ytools/yerr"
 	"time"
 )
 
@@ -48,7 +49,7 @@ func TimeMs(t time.Time) string {
 }
 
 // 时间 加减 天数
-func DaysOffset(t time.Time, days int) time.Time {
+func TimeOffsetDays(t time.Time, days int) time.Time {
 	var (
 		durations time.Duration
 		endDt     time.Time
@@ -67,15 +68,15 @@ func DaysOffset(t time.Time, days int) time.Time {
 }
 
 // 时间 加减 秒
-func SecsOffset(t time.Time, secs int) time.Time {
-	res := time.Unix(t.Unix()+int64(secs), 0)
+func TimeOffsetSecs(t time.Time, secs int) time.Time {
+	res := time.Unix(t.Unix()+int64(secs), 0).UTC()
 	return res
 }
 
 // 时间 加减 毫秒
-func MilliOffset(t time.Time, milli int) time.Time {
+func TimeOffsetMilli(t time.Time, milli int) time.Time {
 	msec := UnixMilli(t) + int64(milli)
-	return time.Unix(msec/1e3, (msec%1e3)*1e6)
+	return time.Unix(msec/1e3, (msec%1e3)*1e6).UTC()
 }
 
 func UnixMilli(t time.Time) int64 {
@@ -83,13 +84,22 @@ func UnixMilli(t time.Time) int64 {
 }
 
 // 获取时间列表
-func TimeList(startT, endT time.Time, offset int, offsetFunc func(t time.Time, offset int) time.Time) []time.Time {
+func TimeList(startT, endT time.Time, step int, offsetFunc func(t time.Time, offset int) time.Time) []time.Time {
 	res := make([]time.Time, 0)
 	nextT := startT
 	for nextT.Before(endT) {
 		res = append(res, nextT)
-		nextT = offsetFunc(nextT, offset)
+		nextT = offsetFunc(nextT, step)
 	}
 	res = append(res, endT)
 	return res
+}
+
+// 时间解析
+func Parse(layout string, t string) (time.Time, error) {
+	res, err := time.Parse(layout, t)
+	if err != nil {
+		return time.Time{}, yerr.New(err)
+	}
+	return res, nil
 }

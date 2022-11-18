@@ -2,7 +2,6 @@ package ylog
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
 	"io"
 	log_ "log"
 	"os"
@@ -132,9 +131,9 @@ func Error(err error) {
 	if !canInfo(LevelError) {
 		return
 	}
-	l.Output(2, fmt.Sprintf("[ERROR] original err:%T\n", errors.Cause(err)))
-	l.Output(2, fmt.Sprintf("[ERROR] error msg: %v\n", errors.Cause(err)))
-	l.Output(2, fmt.Sprintf("[ERROR] stack trace: \n %+v\n", err))
+	//l.Output(2, fmt.Sprintf("[ERROR] original err:%T\n", errors.Cause(err)))
+	//l.Output(2, fmt.Sprintf("[ERROR] error msg: %v\n", errors.Cause(err)))
+	l.Output(2, fmt.Sprintf("[ERROR] \n %+v\n", err))
 }
 
 func Info(v ...interface{}) {

@@ -18,7 +18,7 @@ type Pipeline struct {
 	entry       Worker // 步骤1
 	final       Worker // 最后的步骤
 	workflows   []Worker
-	workingChan chan int // 正在工作的数量
+	workingChan chan struct{} // 正在工作的数量
 	inWg        *sync.WaitGroup
 	inCache     chan interface{} // 参数缓存
 	exitFlag    bool
@@ -41,7 +41,7 @@ func NewPipelines(parallelSize int, workers ...Worker) *Pipeline {
 		entry:       entry,
 		final:       final,
 		workflows:   newWorkers,
-		workingChan: make(chan int, parallelSize),
+		workingChan: make(chan struct{}, parallelSize),
 		inWg:        &sync.WaitGroup{},
 		threadWg:    &sync.WaitGroup{},
 		inCache:     make(chan interface{}, parallelSize),
@@ -75,7 +75,7 @@ func (pl *Pipeline) AddTask(ins ...interface{}) {
 	for _, in := range ins {
 		pl.inWg.Add(1)
 		select {
-		case pl.workingChan <- 1:
+		case pl.workingChan <- struct{}{}:
 			go pl.start(in)
 		default:
 			pl.inCache <- in

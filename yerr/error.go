@@ -1,6 +1,10 @@
 package yerr
 
-import "github.com/link-yundi/ytools/ylog"
+import (
+	"github.com/link-yundi/ytools"
+	"github.com/link-yundi/ytools/ylog"
+	"github.com/pkg/errors"
+)
 
 /**
 ------------------------------------------------
@@ -15,8 +19,12 @@ var (
 	errList []error
 )
 
+func New(err error) error {
+	return errors.Wrap(err, ytools.ErrStackTraceSplit)
+}
+
 // 错误归集器
-func Collect(errs ...error) {
+func Put(errs ...error) {
 	for _, err := range errs {
 		if err != nil {
 			errChan <- err
@@ -25,9 +33,9 @@ func Collect(errs ...error) {
 }
 
 // 打印error 并且关闭
-func Log() {
+func HandleFunc(handler func(error)) {
 	for _, err := range errList {
-		ylog.Error(err)
+		handler(err)
 	}
 	close(errChan)
 }

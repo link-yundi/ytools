@@ -1,6 +1,7 @@
 package ypath
 
 import (
+	"github.com/link-yundi/ytools/yerr"
 	"os"
 )
 
@@ -16,7 +17,7 @@ Created on 2022-11-07 11:28
 func MkDirs(dirPath string) error {
 	if !Has(dirPath) {
 		err := os.MkdirAll(dirPath, os.ModePerm)
-		return err
+		return yerr.New(err)
 	}
 	return nil
 }
