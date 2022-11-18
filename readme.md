@@ -10,4 +10,4 @@ go get -u github.com/link-yundi/ytools
 
 ### 文档
 
-[https://pkg.go.dev/github.com/link-yundi/ytools]
+[pkg.go.dev](https://pkg.go.dev/github.com/link-yundi/ytools)
