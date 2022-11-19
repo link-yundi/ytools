@@ -2,6 +2,7 @@ package yerr
 
 import (
 	"github.com/link-yundi/ytools"
+	"github.com/link-yundi/ytools/ylog"
 	"github.com/pkg/errors"
 )
 
@@ -49,6 +50,6 @@ func listen() {
 }
 
 func init() {
-	//ylog.Info("启动yerror错误收集")
-	//go listen()
+	ylog.Info("启动yerror错误收集")
+	go listen()
 }
