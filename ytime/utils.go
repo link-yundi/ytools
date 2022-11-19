@@ -80,7 +80,7 @@ func TimeOffsetMilli(t time.Time, milli int) time.Time {
 }
 
 func UnixMilli(t time.Time) int64 {
-	return t.Unix()*1e3 + int64(t.UnixNano())/1e6
+	return int64(t.UnixNano()) / 1e6
 }
 
 // 获取时间列表

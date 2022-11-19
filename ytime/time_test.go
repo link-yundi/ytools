@@ -15,13 +15,13 @@ Created on 2022-11-07 18:59
 
 func TestTimeList(t *testing.T) {
 	startDatetime := "2022-11-18 17:41:00.000"
-	startDt, err := Parse(DateLayout, startDatetime)
+	startDt, err := Parse(DatetimeMsLayout, startDatetime)
 	if err != nil {
 		ylog.Error(err)
 	}
-	endT := TimeOffsetSecs(startDt, 50)
-	tList := TimeList(startDt, endT, 4, TimeOffsetSecs)
+	endT := TimeOffsetMilli(startDt, 500)
+	tList := TimeList(startDt, endT, 50, TimeOffsetMilli)
 	for _, d := range tList {
-		ylog.Info(Datetime(d))
+		ylog.Info(DatetimeMs(d))
 	}
 }
