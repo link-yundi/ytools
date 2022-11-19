@@ -2,7 +2,6 @@ package yerr
 
 import (
 	"github.com/link-yundi/ytools/ylog"
-	"github.com/pkg/errors"
 	"testing"
 )
 
@@ -15,15 +14,15 @@ Created on 2022-11-18 11:07
 **/
 
 func fn1() {
-	var err1, err2 error
-	err1 = New("错误1")
-	Put(err1, err2)
+	//var err1, err2 error
+	//err1 = New("错误1")
+	//Put(err1, err2)
 }
 
 func fn2() {
-	var err3 error
-	err3 = errors.New("错误3")
-	Put(err3)
+	//var err3 error
+	//err3 = errors.New("错误3")
+	//Put(err3)
 }
 
 func TestYerr(t *testing.T) {
