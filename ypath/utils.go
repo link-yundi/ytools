@@ -17,7 +17,9 @@ Created on 2022-11-07 11:28
 func MkDirs(dirPath string) error {
 	if !Has(dirPath) {
 		err := os.MkdirAll(dirPath, os.ModePerm)
-		return yerr.New(err.Error())
+		if err != nil {
+			return yerr.New(err.Error())
+		}
 	}
 	return nil
 }
