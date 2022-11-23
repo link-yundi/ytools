@@ -2,7 +2,6 @@ package yerr
 
 import (
 	"github.com/link-yundi/ytools"
-	"github.com/link-yundi/ytools/ylog"
 	"github.com/pkg/errors"
 )
 
@@ -14,10 +13,7 @@ Created on 2022-11-18 11:03
 ------------------------------------------------
 **/
 
-var (
-	errChan = make(chan error)
-	errList []error
-)
+var errHandler func(error)
 
 func New(message string) error {
 	message = ytools.ErrStackTraceSplit + "\n" + message
@@ -27,29 +23,16 @@ func New(message string) error {
 // 错误归集器
 func Put(errs ...error) {
 	for _, err := range errs {
-		if err != nil {
-			errChan <- err
+		if err == nil {
+			continue
+		}
+		if errHandler != nil {
+			errHandler(err)
 		}
 	}
 }
 
 // 打印error 并且关闭
-func HandleFunc(handler func(error)) {
-	for _, err := range errList {
-		handler(err)
-	}
-	close(errChan)
-}
-
-func listen() {
-	for err := range errChan {
-		if err != nil {
-			errList = append(errList, err)
-		}
-	}
-}
-
-func init() {
-	ylog.Info("启动yerror错误收集")
-	go listen()
+func HandleFunc(handleFunc func(error)) {
+	errHandler = handleFunc
 }
