@@ -1,7 +1,6 @@
 package yerr
 
 import (
-	"github.com/link-yundi/ytools"
 	"github.com/pkg/errors"
 )
 
@@ -16,7 +15,6 @@ Created on 2022-11-18 11:03
 var errHandler func(error)
 
 func New(message string) error {
-	message = ytools.ErrStackTraceSplit + "\n" + message
 	return errors.New(message)
 }
 

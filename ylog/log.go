@@ -137,6 +137,14 @@ func Error(err error) {
 	l.Output(2, fmt.Sprintf("[ERROR] %T\n %+v\n", errors.Cause(err), err))
 }
 
+// 只是输出错误信息，不带堆栈
+func ErrorMsg(err error) {
+	if !canInfo(LevelError) {
+		return
+	}
+	l.Output(2, fmt.Sprintf("[ERROR] Msg: %v\n", errors.Cause(err)))
+}
+
 func Info(v ...interface{}) {
 	if !canInfo(LevelInfo) {
 		return
