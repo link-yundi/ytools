@@ -2,6 +2,7 @@ package yerr
 
 import (
 	"github.com/link-yundi/ytools/ylog"
+	"github.com/pkg/errors"
 	"testing"
 )
 
@@ -22,13 +23,14 @@ func fn1() {
 func fn2() {
 	var err3 error
 	err3 = New("错误3")
+	err3 = errors.WithMessage(err3, "额外信息")
 	Put(err3)
 }
 
 func TestYerr(t *testing.T) {
 	// 最外层统一打印error
 	//go listen()
-	HandleFunc(ylog.Error)
+	HandleFunc(ylog.ErrorMsg)
 	fn1()
 	fn2()
 }
