@@ -105,6 +105,15 @@ func Parse(layout string, t string) (time.Time, error) {
 	return res, nil
 }
 
+// 保持数据时区与机器时区一致
+func ParseLocal(layout string, t string) (time.Time, error) {
+	res, err := time.ParseInLocation(layout, t, time.Local)
+	if err != nil {
+		return time.Time{}, yerr.New(err.Error())
+	}
+	return res, nil
+}
+
 // 规范输出
 func Output(secs float64) (str string) {
 	daySecs := 3600 * 24
